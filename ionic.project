@@ -1,0 +1,12 @@
+{
+  "name": "Sporthood",
+  "app_id": "22982165",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ]
+}

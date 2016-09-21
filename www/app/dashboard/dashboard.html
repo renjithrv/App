@@ -1,0 +1,424 @@
+<ion-view >
+
+    <ion-nav-buttons side="right" >
+      
+         <button class="button button-icon button-clear button-dark ion-ios-search" ng-click="searchPopover.show($event)" style="color:#fff !important;align-items: baseline !important;"></button>
+
+         
+
+
+    </ion-nav-buttons>
+
+
+
+ <ion-tabs class="tabs-stable tabs-icon-bottom" >
+
+  <ion-tab icon-on="ion-ios-people" icon-off="ion-ios-people" active>
+
+ <ion-content class="has-header" scroll="true" style="margin-top:2.5rem;margin-bottom:40rem;">
+      
+
+
+
+        <div style="height:100%; overflow:scroll;margin-top:1rem;margin-bottom:5rem;" class="bg-lightgrey"  >
+  
+            <div >
+                <div class="card hybrid" ng-repeat="post in news.items | filter: searchFilter  | orderBy: 'publishedDate':true "  style="margin-top:1rem;margin-bottom:1rem;background-color:#fff !important;">
+
+                    <div class="item item-thumbnail-left item-text-wrap" style="background-color:#fff !important; border-style:solid;
+    border-left-width:4px;   
+    border-left-color:{{post.genre}};margin-top:0rem;margin-bottom:0rem">
+
+
+                        <p ></p>
+                        <img ng-src="{{post.sourceLogo}}" class="profile" width="30" ui-sref="tabs.post-detail({post:post})">
+                        <h2 style="color:#000;font-weight:300;" ui-sref="tabs.post-detail({post:post})">{{post.author}}</h2>
+     <span class="text-small font-thin" style="position: absolute;font-size:1.5rem;right: 8%;"> {{post.date}}</span>
+
+                        <p style="margin-top:0.7rem;" ui-sref="tabs.post-detail({post:post})">{{post.title}}</p>
+                        <span class="interact" ui-sref="tabs.post-detail({post:post})">
+                            <i class="icon calm" style="color:#000;font-size:0.8rem;"> {{post.summary}}</i>
+                           
+                        </span>
+
+
+
+                         <span class="text-small font-thin pull-right" > 
+
+  <button class="button button-positive" style="border:1px solid blueviolet;color:#000;background-color:#fff;cursor:pointer;font-weight:600;min-width:90px !important;" ng-class="{'button-balanced button-outline ion-ios-personadd-outline': !follow, 'button-balanced ion-ios-undo-outline':follow }" ng-click="follow = !follow"> 
+                <span ng-if="!follow"> JOIN</span>
+                <span ng-if="follow"> UNJOIN</span>
+            </button>
+
+
+
+</span>
+                  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+
+  </ion-tab>
+
+
+   <ion-tab icon-on="ion-ios-alarm" icon-off="ion-ios-alarm" >
+
+
+
+    <ion-content class="has-header" scroll="false" style="margin-top:4rem;">
+         <div class="item item-divider padding no-bg no-b bb-grey">
+            <div class="row no-padding">
+                <div class="col text-grey" ng-click="decrementDate(dateFilter)"><i class="icon ion-ios-arrow-back"></i></div>
+                <div class="col text-grey text-center text-small">{{viewDate| amCalendar:referenceTime:formats}}
+                </div>
+                <div class="col text-grey text-right" ng-click="incrementDate(dateFilter)"><i class="icon ion-ios-arrow-forward"></i></div>
+            </div>
+        </div>
+
+      
+
+        <ion-scroll class="bg-lightgrey" direction="y" style="height:100%">
+            <div style="height:700px">
+                <div class="card no-margin bb-grey no-br no-box" ng-if="seletedDateEvents.length > 0" >
+
+                    <div  ng-click="open[$index] = !open[$index]" on-hold="onCardHold($index, notification);">
+                      
+                         
+
+
+
+                       
+                    </div>
+
+
+                </div>
+
+                <div class="list card"  ng-repeat="notification in seletedDateEvents | filter: searchFilter | orderBy: 'startsAt':true track by $index">
+                    <div class="item item-avatar">
+                        <img ng-src="{{notification.logo}}">
+                        <h2 class="balanced" style="color:#8a2be2 !important;">{{notification.title}}</h2>
+                        <p class="text-small" >Proficiency : {{notification.rating}} of 100</p>
+                    </div>
+                    <div class="item item-body">
+                        
+<div class="row">
+
+    <div class="col col-50" align="center" style="font-family:Avenir;font-size:2.4rem;font-weight:600 !important;color:#333 !important;">{{notification.goals}} <br> <span style="color:#ccc;font-size:1rem;" align="center">Goals</span></div>
+     <div class="col col-50" align="center" style="font-family:Avenir;font-size:2.4rem;font-weight:600 !important;color:#333 !important;">{{notification.assist}} <br> <span style="color:#ccc;font-size:1rem;" align="center">Assists</span></div>
+
+</div>
+
+<div class="row" style="font-family:Avenir;">
+
+
+
+    <div class="col col-20" align="center"><span style="font-weight:700 !important;font-size:1rem;color:#8a2be2 !important;">{{notification.passing}}</span><br> <img src="img/passing.png" width="25"></p></div>
+     <div class="col col-20" align="center"><span style="font-weight:700 !important;font-size:1rem;color:#8a2be2 !important;">{{notification.receiving}}</span><br> <img src="img/receiving.png" width="25"></p></div>
+       <div class="col col-20" align="center"><span style="font-weight:700 !important;font-size:1rem;color:#8a2be2 !important;">{{notification.dribbling}}</span><br> <img src="img/dribbling.png" width="25"></p></div>
+         <div class="col col-20" align="center"><span style="font-weight:700 !important;font-size:1rem;color:#8a2be2 !important;">{{notification.attacking}}</span><br> <img src="img/attacking.png" width="25"></p></div>
+           <div class="col col-20" align="center"><span style="font-weight:700 !important;font-size:1rem;color:#8a2be2 !important;">{{notification.defending}}</span><br> <img src="img/defending.png" width="25"></p></div>
+
+
+
+</div>
+
+<div class="row" style="font-family:Avenir;">
+
+
+
+    <div class="col col-20" align="center"><span style="font-weight:700 !important;font-size:1rem;color:#8a2be2 !important;">{{notification.core}}</span> <br> <img src="img/core.png" width="25"></p></div>
+     <div class="col col-20" align="center"><span style="font-weight:700 !important;font-size:1rem;color:#8a2be2 !important;">{{notification.upper}}</span> <br> <img src="img/strength.png" width="25"></p></div>
+       <div class="col col-20" align="center"><span style="font-weight:700 !important;font-size:1rem;color:#8a2be2 !important;">{{notification.lower}}</span> <br> <img src="img/lower.png" width="25"></p></div>
+         <div class="col col-20" align="center"><span style="font-weight:700 !important;font-size:1rem;color:#8a2be2 !important;">{{notification.weight}}</span> <br> <img src="img/weight.png" width="25"></p></div>
+           <div class="col col-20" align="center"><span style="font-weight:700 !important;font-size:1rem;color:#8a2be2 !important;">{{notification.flexibility}}</span> <br> <img src="img/flexibility.png" width="25"></p></div>
+
+
+
+</div>
+
+
+   
+   
+                    </div>
+
+                   
+                </div>
+            </div>
+        </ion-scroll>
+
+    </ion-content>
+
+    
+
+
+
+  </ion-tab>
+
+
+     <ion-tab icon-on="ion-stats-bars" icon-off="ion-stats-bars" >
+
+     <ion-content class="has-header" scroll="true" style="margin-top:4rem;">
+    <section  ng-controller="TabController as tab" class="progress_tab" >
+   
+
+<div class="row">
+    
+    <div class="col col-20" style="font-size:0.8rem;color:#ccc;font-family:Avenir;" align="center"><img src="img/circleb.png" width="15"> <br>Passing</div>
+    <div class="col col-20" style="font-size:0.8rem;color:#ccc;font-family:Avenir;" align="center"><img src="img/circlebl.png" width="15"> <br>Receiving</div>
+    <div class="col col-20" style="font-size:0.8rem;color:#ccc;font-family:Avenir;" align="center"><img src="img/circley.png" width="15"> <br>Defending</div>
+    <div class="col col-20" style="font-size:0.8rem;color:#ccc;font-family:Avenir;" align="center"><img src="img/circleg.png" width="15"> <br>Dribbling</div>
+    <div class="col col-20" style="font-size:0.8rem;color:#ccc;font-family:Avenir;" align="center"><img src="img/circler.png" width="15"> <br>Attacking</div>
+
+
+</div>
+
+
+       
+       
+                          <div class="row"  >
+               <div class="col">
+                   <div class="card">
+                       
+                       <div class="chartWrapper">
+                           <div class="chartAreaWrapper">
+                               <canvas id="myChart" height="400" width="600"></canvas>
+
+
+                           </div>
+
+
+                       </div>
+               
+
+
+                   </div>
+
+                     
+               </div>
+       </div>
+     
+
+
+
+
+
+  
+   </section>
+ </ion-content>
+  </ion-tab>
+
+
+   <ion-tab icon-on="icon ion-ios-pulse-strong" icon-off="icon ion-ios-pulse-strong" >
+
+
+    <ion-content class="has-header" scroll="false" style="margin-top:4rem;">
+        <div class="row text-center">
+            <div class="col font-thin" ng-class="news.type === 'all' ? 'text-large balanced' : ''" ng-click="news.type = 'all'">All</div>
+            <div class="col font-thin" ng-class="news.type === 'forward' ? 'text-large balanced' : ''" ng-click="news.type = 'forward'">Forward</div>
+            <div class="col font-thin" ng-class="news.type === 'midfield' ? 'text-large balanced' : ''" ng-click="news.type = 'midfield'">Midfielder</div>
+             <div class="col font-thin" ng-class="news.type === 'defender' ? 'text-large balanced' : ''" ng-click="news.type = 'defender'">Defender</div>
+
+        </div>
+
+        <div style="height:100%; overflow:scroll" class="bg-lightgrey">
+            <div ng-if="news.type === 'all'">
+                <div style="height:100%;">
+                <div class="row" ng-repeat="contact in contacts | filter: searchFilter track by $index" ng-if="$index % 2==0">
+
+                    <div class="col">
+                        <div class="card contact animated bounceIn item-remove-animate" on-hold="deletecontact(contacts[$index]);" ng-if="contacts[$index] !== undefined">
+                            <div class="item item-image item-text-wrap">
+                                <div><img ng-src="{{contacts[$index].photo}}"></div>
+                                <h2 class="lead text-small mt" style="color:#555 !important;">{{contacts[$index].name}}</h2>
+                                <p class="">{{contacts[$index].desc}}</p>
+                            </div>
+                            <div class="item item-footer">
+                                <div class="row no-padding">
+                                    <div class="col no-padding" style="font-size:1rem;vertical-align:middle;color:#ccc;">  <img src="img/trophy.png" width="20" height="20" > <br> <span style="font-weight:700;">{{contacts[$index].points}} Pts</span></div>
+                                    
+                                  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card contact animated bounceIn item-remove-animate" on-hold="deleteContact(contacts[$index]);" ng-if="contacts[$index + 1] !== undefined">
+                            <div class="item item-image item-text-wrap" ui-sref="tabs.contact-profile({contact: contacts[$index + 1]})">
+                                <div><img ng-src="{{contacts[$index + 1].photo}}"></div>
+                                <h2 class="lead text-small mt" style="color:#555 !important;">{{contacts[$index + 1].name}}</h2>
+                                <p class="">{{contacts[$index + 1].desc}}</p>
+                            </div>
+                            <div class="item item-footer">
+                                <div class="row no-padding">
+                                   <div class="col no-padding" style="font-size:1rem;vertical-align:middle;color:#ccc;">  <img src="img/trophy.png" width="20" height="20" > <br> <span style="font-weight:700;">{{contacts[$index + 1].points}} Pts</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            <div ng-if="news.type === 'forward'">
+                  <div style="height:700px">
+                <div class="row" ng-repeat="contact in contacts | filter: searchFilter track by $index" ng-if="$index % 2==0">
+
+                    <div class="col">
+                        <div class="card contact animated bounceIn item-remove-animate" on-hold="deletecontact(contacts[$index]);" ng-if="contacts[$index] !== undefined">
+                            <div class="item item-image item-text-wrap">
+                                <div><img ng-src="{{contacts[$index].photo}}"></div>
+                                <h2 class="lead text-small mt" style="color:#555 !important;">{{contacts[$index].name}}</h2>
+                                <p class="">{{contacts[$index].desc}}</p>
+                            </div>
+                            <div class="item item-footer">
+                                <div class="row no-padding">
+                                    <div class="col no-padding" style="font-size:1rem;vertical-align:middle;color:#ccc;">  <img src="img/trophy.png" width="20" height="20" > <br> <span style="font-weight:700;">{{contacts[$index].points}} Pts</span></div>
+                                    
+                                  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card contact animated bounceIn item-remove-animate" on-hold="deleteContact(contacts[$index]);" ng-if="contacts[$index + 1] !== undefined">
+                            <div class="item item-image item-text-wrap" ui-sref="tabs.contact-profile({contact: contacts[$index + 1]})">
+                                <div><img ng-src="{{contacts[$index + 1].photo}}"></div>
+                                <h2 class="lead text-small mt" style="color:#555 !important;">{{contacts[$index + 1].name}}</h2>
+                                <p class="">{{contacts[$index + 1].desc}}</p>
+                            </div>
+                            <div class="item item-footer">
+                                <div class="row no-padding">
+                                   <div class="col no-padding" style="font-size:1rem;vertical-align:middle;color:#ccc;">  <img src="img/trophy.png" width="20" height="20" > <br> <span style="font-weight:700;">{{contacts[$index + 1].points}} Pts</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            <div ng-if="news.type === 'midfield'">
+                 <div style="height:700px">
+                <div class="row" ng-repeat="contact in contacts | filter: searchFilter track by $index" ng-if="$index % 2==0">
+
+                    <div class="col">
+                        <div class="card contact animated bounceIn item-remove-animate" on-hold="deletecontact(contacts[$index]);" ng-if="contacts[$index] !== undefined">
+                            <div class="item item-image item-text-wrap">
+                                <div><img ng-src="{{contacts[$index].photo}}"></div>
+                                <h2 class="lead text-small mt" style="color:#555 !important;">{{contacts[$index].name}}</h2>
+                                <p class="">{{contacts[$index].desc}}</p>
+                            </div>
+                            <div class="item item-footer">
+                                <div class="row no-padding">
+                                    <div class="col no-padding" style="font-size:1rem;vertical-align:middle;color:#ccc;">  <img src="img/trophy.png" width="20" height="20" > <br> <span style="font-weight:700;">{{contacts[$index].points}} Pts</span></div>
+                                    
+                                  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card contact animated bounceIn item-remove-animate" on-hold="deleteContact(contacts[$index]);" ng-if="contacts[$index + 1] !== undefined">
+                            <div class="item item-image item-text-wrap" ui-sref="tabs.contact-profile({contact: contacts[$index + 1]})">
+                                <div><img ng-src="{{contacts[$index + 1].photo}}"></div>
+                                <h2 class="lead text-small mt" style="color:#555 !important;">{{contacts[$index + 1].name}}</h2>
+                                <p class="">{{contacts[$index + 1].desc}}</p>
+                            </div>
+                            <div class="item item-footer">
+                                <div class="row no-padding">
+                                   <div class="col no-padding" style="font-size:1rem;vertical-align:middle;color:#ccc;">  <img src="img/trophy.png" width="20" height="20" > <br> <span style="font-weight:700;">{{contacts[$index + 1].points}} Pts</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+          <div ng-if="news.type === 'defender'">
+               <div style="height:700px">
+                <div class="row" ng-repeat="contact in contacts | filter: searchFilter track by $index" ng-if="$index % 2==0">
+
+                    <div class="col">
+                        <div class="card contact animated bounceIn item-remove-animate" on-hold="deletecontact(contacts[$index]);" ng-if="contacts[$index] !== undefined">
+                            <div class="item item-image item-text-wrap">
+                                <div><img ng-src="{{contacts[$index].photo}}"></div>
+                                <h2 class="lead text-small mt" style="color:#555 !important;">{{contacts[$index].name}}</h2>
+                                <p class="">{{contacts[$index].desc}}</p>
+                            </div>
+                            <div class="item item-footer">
+                                <div class="row no-padding">
+                                    <div class="col no-padding" style="font-size:1rem;vertical-align:middle;color:#ccc;">  <img src="img/trophy.png" width="20" height="20" > <br> <span style="font-weight:700;">{{contacts[$index].points}} Pts</span></div>
+                                    
+                                  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card contact animated bounceIn item-remove-animate" on-hold="deleteContact(contacts[$index]);" ng-if="contacts[$index + 1] !== undefined">
+                            <div class="item item-image item-text-wrap" ui-sref="tabs.contact-profile({contact: contacts[$index + 1]})">
+                                <div><img ng-src="{{contacts[$index + 1].photo}}"></div>
+                                <h2 class="lead text-small mt" style="color:#555 !important;">{{contacts[$index + 1].name}}</h2>
+                                <p class="">{{contacts[$index + 1].desc}}</p>
+                            </div>
+                            <div class="item item-footer">
+                                <div class="row no-padding">
+                                   <div class="col no-padding" style="font-size:1rem;vertical-align:middle;color:#ccc;">  <img src="img/trophy.png" width="20" height="20" > <br> <span style="font-weight:700;">{{contacts[$index + 1].points}} Pts</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+
+
+    </ion-content>
+
+  </ion-tab>
+
+
+
+   <ion-tab icon-on="icon ion-android-notifications-none" icon-off="icon ion-android-notifications-none" >
+
+ 
+    <ion-content class="has-header" style="margin-top:4rem;">
+        
+        <div class="note note-info padding" style="margin:20px;" ng-if="messages.length === 0">
+            <h2 class="positive">No Messages</h4>
+            <p class="dark">Click on the chat button to start a conversation with a teacher</p>
+        </div>
+        
+        <div class="list" style="padding:5px;border-radius:10px;">
+            <div class="item item-avatar1 item-text-wrap"  ng-repeat="item in conversations  | filter: searchFilter " ui-sref="tabs.chat({chat: item})" align="left" style="padding:20px;margin:10px;border-radius:10px;border-color:{{item.genre}};">
+
+             
+                <h2 class="lead"><i class="icon ion-coffee" style="color:#e74c3c !important;"><span class="text-smaller"> </span></i> {{item.recepientname}}</h2>
+                <p class="text-small" ng-if="item.messages.length"> {{item.messages[item.messages.length -1].text}}</p>
+                
+                </span>
+        </div>
+        </div>
+        
+    </ion-content>
+
+
+
+  </ion-tab>
+
+
+  </ion-tabs>
+
+
+
+   
+
+</ion-view>

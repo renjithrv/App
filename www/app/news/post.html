@@ -1,0 +1,45 @@
+<ion-view  class="bg">
+
+    <ion-content class="has-header" scroll-event-interval="5" padding="false">
+
+        <div class="card post-detail" style="background-color:#fff !important;"><BR>
+            <div class="item item-avatar">
+                <img ng-src="{{post.sourceLogo}}">
+                <h2 class="lead" >{{post.author}}</h2>
+                <p class="text-smaller" >{{post.title}}</p>
+
+            </div><br>
+            <div class="item item-body">
+                <img class="full-image" ng-src="{{post.image}}" style="width:100%;height:200px;">
+                  <p style="color:#000 !important;font-weight:400 !important;">Session Theme : {{post.theme}}</p>
+                <p><i class="icon ion-clock" ></i> {{post.summary}}</p>
+
+                <div class="item comments">
+                    <p>
+                        <span ng-click="like(post);"><img ng-src="{{liker.photo}}" class="likers" ng-repeat="liker in post.likes | limitTo:-3"><span class="pull-left interact"> +{{post.likes.length}} Voted In</span>
+                        <span  class="pull-right"> <button class="button button-positive" style="border:1px solid blueviolet;color:#000;background-color:#fff;cursor:pointer;font-weight:600;" ng-class="{'button-balanced button-outline ion-ios-personadd-outline': !follow, 'button-balanced ion-ios-undo-outline':follow }" ng-click="follow = !follow"> 
+                <span ng-if="!follow"> JOIN</span>
+                <span ng-if="follow"> UNJOIN</span>
+            </button></a>
+                </p><br>
+                </div>
+                <div class="item comments no-b">
+
+                <p >{{post.description}}</p>
+
+                    <div class="item item-avatar" ng-if="post.comments"ng-repeat="comment in post.comments" >
+                        <img ng-src="{{comment.photo}}"/>
+                        <h2 class="text-small">{{comment.name}}</h2>
+                    <p class="text-smaller">{{comment.text}}</p>
+                    
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+
+    </ion-content>  
+
+ 
+
+</ion-view>

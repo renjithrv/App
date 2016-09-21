@@ -1,0 +1,32 @@
+<ion-view >
+
+    <ion-nav-buttons side="right" >
+        <button class="button button-icon dark icon ion-android-notification" ></button>
+    </ion-nav-buttons>
+
+    <ion-content class="has-header" scroll="false" >
+      
+
+        <div style="height:95%; overflow:scroll" class="bg-lightgrey">
+  
+            <div >
+                <div class="card hybrid" ng-repeat="post in news.items | filter: searchFilter  | orderBy: 'publishedDate':true " ui-sref="tabs.post-detail({post:post})">
+
+                    <div class="item item-thumbnail-left item-text-wrap">
+                        <img ng-src="{{post.image}}">
+                        <img ng-src="{{post.sourceLogo}}" class="profile">
+                        <h2 class="balanced">{{post.author}}</h2>
+                        <p>{{post.title}}</p>
+                        <span class="interact">
+                            <i class="icon calm" ng-class="{'ion-ios-heart': liked, 'ion-ios-heart-outline': !liked }" ng-click="liked = !liked"> {{post.likes.length}}</i>
+                            <i class="icon ion-ios-chatbubble-outline calm"> {{post.comments.length}}</i>
+                        </span>
+                        <span class="text-small font-thin pull-right" am-time-ago="{{post.publishedDate}}"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+
+    <a class="btn-floating btn-large waves-effect waves-light red lighten-1" style="position:fixed; bottom:3%;right:5%;z-index:999" ng-click="newsPopover.show($event);"><i class="icons ion-plus"></i></a>
+</ion-view>

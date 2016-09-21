@@ -1,0 +1,27 @@
+<ion-side-menus enable-menu-with-back-views="false">
+
+    <ion-side-menu-content>
+        <ion-nav-bar class="bar-light no-b">
+            <ion-nav-back-button></ion-nav-back-button>
+            <ion-nav-buttons side="left">
+                <button class="button button-icon button-clear button-dark ion-navicon" menu-toggle="left"></button>
+            </ion-nav-buttons>
+        </ion-nav-bar>
+        <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
+    </ion-side-menu-content>
+
+    <ion-side-menu side="left" width="95" id="menu" hide-nav-bar="false" style="background-color:#fff;">
+       
+        <ion-content padding="false" class="side-menu-left">
+            <ion-list>
+                <ion-item class="c1 item-avatar" menu-close style="background-color:#fff;"><img ng-src="{{user.photo}}" ui-sref="tabs.account"></ion-item>
+                <ion-item menu-close style="background-color:#fff;" ><i class="icon ion-home" ui-sref="tabs.dashboard" style="color:#ccc;width:20px;height:20px;color:#000;"></i><p style="color:#000 !important;" ui-sref="tabs.dashboard">Home</p></ion-item>
+             
+                
+                <ion-item class="c5" menu-close style="background-color:#fff;"><i class="icon ion-ios-gear-outline"  style="color:#000;" ui-sref="tabs.account"></i><p style="color:#000 !important;" ui-sref="tabs.account">Settings</p></ion-item>
+                 <ion-item class="c5" menu-close style="background-color:#fff;"><i class="ion-cube"  style="color:#000;"></i><p style="color:#000 !important;" >Package</p></ion-item>
+                <ion-item class="c6" menu-close style="background-color:#fff;"><i class="icon ion-ios-unlocked-outline" ng-click="signOut();" style="color:#000;"></i><p style="color:#000 !important;" ng-click="signOut();" >Signout</p></ion-item>
+            </ion-list>
+        </ion-content>
+    </ion-side-menu>
+</ion-side-menus>

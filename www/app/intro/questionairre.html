@@ -1,0 +1,44 @@
+<ion-modal-view hide-nav-bar="true" class="auth" style="background-color:#fff;">
+
+    <ion-content scroll="false">
+
+        <div ng-form="signup_form" class="padding text-center" novalidate>
+            <ion-list>
+               
+<h4 style="font-family:Avenir;line-spacing:0.8rem;">Rate Yourself</h4>
+
+
+
+
+                  <div class="item range">
+                    <img src="img/footballg.png" width="30">
+                    <input type="range" name="football" id="football" max="100" min="0" step="25" ng-model="football"> {{football}} 
+                </div>  
+
+                 <div class="item range">
+                    <img src="img/badmintong.png" width="30">
+                    <input type="range" name="badminton" id="badminton" max="100" min="0" step="25" ng-model="badminton"> {{badminton}} 
+                </div>  
+
+
+                
+
+                 <div class="item range">
+                    <img src="img/basketball.png" width="30">
+                    <input type="range" name="basketball" id="basketball" max="100" min="0" step="25" ng-model="basketball"> {{basketball}} 
+                </div>  
+
+           
+            </ion-list>
+
+            <button class="btn waves-effect waves-light button button-positive button-block waves-effect waves-light" ng-click="gotoHome()" style="background-color:#673AB7;border:1px solid #673AB7;color:#fff;">Complete Registration</button>
+        </div>
+        
+
+         <p class="padding-horizontal" >
+            <span class="balanced pull-left" ng-click="closeQuestion();openLogin();">Log in</span>
+            <span class="dark pull-right" ng-click="closeQuestion()">Close</span>
+        </p>
+       
+    </ion-content>
+</ion-modal-view>

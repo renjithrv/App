@@ -1,0 +1,50 @@
+<ion-view  class="bg-white">
+
+    <ion-nav-buttons side="right">
+       
+        <button class="button button-dark button-clear icon ion-ios-compose-outline" ui-sref="tabs.edit-profile"></button>
+    </ion-nav-buttons>
+
+    <ion-content class="has-header bt-grey profile" scroll="false">
+    <br>
+        <div class="header">
+            <img ng-src="{{user.photo}}">
+            <!--<span class="badge badge-balanced">3</span>-->
+            <h2 class="lead text-medium">{{user.name}}</h2>
+            <p>{{user.city}}</p>
+          
+        </div>
+
+        <div class="row no-padding bb-grey text-center" style="text-transform: capitalize;">
+            <div class="col font-thin" ng-class="{'text-medium balanced bb' : profile.type === 1}" ng-click="profile.type = 1"><br/>Sports</div>
+            <div class="col font-thin" ng-class="{'text-medium balanced bb' : profile.type === 2}" ng-click="profile.type = 2"><br/>Locations</div>
+             <div class="col font-thin" ng-class="{'text-medium balanced bb' : profile.type === 3}" ng-click="profile.type = 3"><br/>Packages</div>
+           
+        </div>
+
+        <ion-scroll direction="y" style="height: 100%">
+            <div ng-if="profile.type === 1">
+                <div style="height: 700px">
+                    
+                </div>
+            </div>
+
+            <div ng-if="profile.type === 2">
+                <div style="height: 700px">
+                    <div class="item item-avatar item-button-right followers" ng-repeat="contact in contacts  | filter: searchFilter">
+                       
+                    </div>
+                </div>
+            </div>
+
+            <div ng-if="profile.type === 3">
+                <div style="height: 700px">
+                    <div class="item item-avatar item-button-right followers" ng-repeat="contact in contacts  | filter: searchFilter" ng-if="$index % 3 === 1">
+                       
+                    </div>
+                </div>
+
+            </div>
+        </ion-scroll>
+    </ion-content>
+</ion-view>
